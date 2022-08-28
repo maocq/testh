@@ -34,27 +34,19 @@ config_jmeter_file="../jmeter/config-jmeter.json"
 duration_seconds=$(jq -r ".duration_seconds" "$config_jmeter_file")
 ramp_up_period_seconds=$(jq -r ".ramp_up_period_seconds" "$config_jmeter_file")
 latency=$(jq -r ".latency" "$config_jmeter_file")
-case_one_number_users=$(jq -r ".case_one_number_users" "$config_jmeter_file")
-case_two_number_users=$(jq -r ".case_two_number_users" "$config_jmeter_file")
-case_three_number_users=$(jq -r ".case_three_number_users" "$config_jmeter_file")
 hello_number_users=$(jq -r ".hello_number_users" "$config_jmeter_file")
-primes_number_users=$(jq -r ".primes_number_users" "$config_jmeter_file")
 get_hello_number_users=$(jq -r ".get_hello_number_users" "$config_jmeter_file")
-find_one_number_users=$(jq -r ".find_one_number_users" "$config_jmeter_file")
-find_multiple_test_number_users=$(jq -r ".find_multiple_test_number_users" "$config_jmeter_file")
+get_hello_pool_number_users=$(jq -r ".get_hello_pool_number_users" "$config_jmeter_file")
+query_number_users=$(jq -r ".query_number_users" "$config_jmeter_file")
 
 sed -i -e "s/_SERVICE_IP_/$ip/g" \
     -e "s/_DURATION_SECONDS_/$duration_seconds/g" \
     -e "s/_RAMP_UP_PERIOD_SECONDS_/$ramp_up_period_seconds/g" \
     -e "s/_LATENCY_/$latency/g" \
-    -e "s/_CASE_ONE_NUMBER_USERS_/$case_one_number_users/g" \
-    -e "s/_CASE_TWO_NUMBER_USERS_/$case_two_number_users/g" \
-    -e "s/_CASE_THREE_NUMBER_USERS_/$case_three_number_users/g" \
     -e "s/_HELLO_NUMBER_USERS_/$hello_number_users/g" \
-    -e "s/_PRIMES_NUMBER_USERS_/$primes_number_users/g" \
     -e "s/_GET_HELLO_NUM_USERS_/$get_hello_number_users/g" \
-    -e "s/_FIND_ONE_NUMBER_USERS_/$find_one_number_users/g" \
-    -e "s/_FIND_MULTIPLE_TEST_NUMBER_USERS_/$find_multiple_test_number_users/g" \
+    -e "s/_GET_HELLO_POOL_NUM_USERS_/$get_hello_pool_number_users/g" \
+    -e "s/_QUERY_NUMBER_USERS_/$query_number_users/g" \
     ".tmp/work/JMeterBenchmark-$case.jmx"
 
 

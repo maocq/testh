@@ -10,8 +10,8 @@ import (
 
 func Start() {
 	db := config.InitDB()
+	httpClient := config.GetHttpClient()
 	httpPoolClient := config.GetHttpClientPool()
-	httpClient := config.GetHttpClientPool()
 
 	accountRepository := repository.AccountDataRepository{DB: db}
 	helloRepository := httpclient.HelloHttpRepository{Client: httpClient, PoolClient: httpPoolClient, Url: config.GetUrlService()}

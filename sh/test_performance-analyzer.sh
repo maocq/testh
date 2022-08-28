@@ -24,18 +24,9 @@ fi
 
 scenarios=(
     #"hello"
-    #"case-one?latency=50"
-    #"case-one?latency=200"
-    #"case-one?latency=500"
-    #"case-two?latency=50"
-    #"case-two?latency=200"
-    #"case-two?latency=500"
-    #"case-three"
-    "get-hello?latency=80"
-    #"get-hello?latency=100"
-    #"get-hello?latency=200"
-    #"get-hello?latency=500"
-    #"primes"
+    "get-hello?latency=50"
+    "get-hello-pool?latency=50"
+    #"db"
 )
 
 

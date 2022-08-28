@@ -28,19 +28,10 @@ _out=$(execute_remote_command "sudo apt-get -y install apache2-utils" "$tests_ip
 host="http://$ip:8080/api/"
 
 scenarios=(
-	"hello"
-	"case-one?latency=50"
-	"case-one?latency=200"
-	"case-one?latency=500"
-	"case-two?latency=50"
-	"case-two?latency=200"
-	"case-two?latency=500"
-	"case-three"
-	"get-hello?latency=50"
-	"get-hello?latency=100"
-	"get-hello?latency=200"
-	"get-hello?latency=500"
-	"primes"
+    #"hello"
+    "get-hello?latency=100"
+    #"get-hello-pool?latency=100"
+    #"db"
 )
 
 for scenario in "${scenarios[@]}"; do

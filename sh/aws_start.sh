@@ -33,4 +33,4 @@ node_ip=$(start "$case-node" "node" "$image_id" "$instance_type" "$user" "$key" 
 configuration=$(echo "printf 'DATABASE_IP="$db_ip"\nEXTERNAL_SERVICE_IP="$node_ip"\n' > /tmp/env.list")
 ip=$(start "$case" "$case" "$image_id" "$instance_type" "$user" "$key" "$key_name" "$security_group" "$configuration")
 
-echo "http://$ip:8080/api/case-one" > /dev/tty
+echo "http://$ip:8080/api/hello" > /dev/tty
