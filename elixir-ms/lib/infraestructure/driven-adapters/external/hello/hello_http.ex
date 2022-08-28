@@ -6,19 +6,19 @@ defmodule ElixirMs.Adapters.HelloHttp do
 
   def hello(latency) do
     %{ external_service_ip: external_service_ip } = SecretManagerAdapter.get_secret()
-    url = "http://#{external_service_ip}:8080/#{latency}"
 
-    case Finch.build(:get, url) |> Finch.request(HttpFinch) do
-      {:ok, %Finch.Response{body: body}} -> {:ok, body}
+    case HttpClient.request(:http, external_service_ip, 8080, "GET", "/#{latency}") do
+      {:ok, response} -> {:ok, List.first(response.data)}
       error -> error
     end
   end
 
-  defp hello_mint(latency) do
+  def hello_connection_pool(latency) do
     %{ external_service_ip: external_service_ip } = SecretManagerAdapter.get_secret()
+    url = "http://#{external_service_ip}:8080/#{latency}"
 
-    case HttpClient.request(:http, external_service_ip, 8080, "GET", "/#{latency}") do
-      {:ok, response} -> {:ok, List.first(response.data)}
+    case Finch.build(:get, url) |> Finch.request(HttpFinch) do
+      {:ok, %Finch.Response{body: body}} -> {:ok, body}
       error -> error
     end
   end

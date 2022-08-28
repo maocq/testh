@@ -3,15 +3,11 @@ defmodule ElixirMs.UseCase.GetHelloUseCase do
 
   @hello_repository Application.compile_env(:elixir_ms, :hello_repository)
 
-  def handle(latency) do
+  def hello(latency) do
     @hello_repository.hello(latency)
   end
 
-  def handle_multiple() do
-    _ = @hello_repository.hello(50)
-    _ = @hello_repository.hello(50)
-    _ = @hello_repository.hello(50)
-    _ = @hello_repository.hello(50)
-    @hello_repository.hello(50)
+  def hello_connection_pool(latency) do
+    @hello_repository.hello_connection_pool(latency)
   end
 end

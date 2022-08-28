@@ -33,7 +33,7 @@ defmodule ElixirMs.DrivenAdapters.Secrets.SecretManagerAdapter do
   end
 
   defp get_initial_secret() do
-    if Mix.env() == :dev do
+    if Mix.env() == :nodev do
       secret_name = ConfigHolder.conf().secret_name
       region = ConfigHolder.conf().region
 
@@ -48,7 +48,7 @@ defmodule ElixirMs.DrivenAdapters.Secrets.SecretManagerAdapter do
   end
 
   def get_secret() do
-    if Mix.env() == :dev do
+    if Mix.env() == :nodev do
       case :ets.lookup(:secret_manager_adapter, :secret) do
         [{_, secret}] -> secret
         _ -> GenServer.call(__MODULE__, :get_secret)

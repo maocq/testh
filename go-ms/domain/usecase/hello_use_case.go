@@ -11,5 +11,5 @@ func (h *HelloUseCase) Hello(latency string) (string, error) {
 }
 
 func (h *HelloUseCase) HelloConnectionPool(latency string) (string, error) {
-	return h.HelloRepository.Hello(latency)
+	return h.HelloRepository.HelloConnectionPool(latency)
 }

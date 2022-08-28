@@ -1,8 +1,6 @@
 defmodule ElixirMs.EntryPoint.Rest.ElixirMsController do
-  alias ElixirMs.UseCase.CasesUseCase
-  alias ElixirMs.UseCase.GetAccountUseCase
+  alias ElixirMs.UseCase.DBUseCase
   alias ElixirMs.UseCase.GetHelloUseCase
-  alias ElixirMs.UseCase.GetPrimesUseCase
 
   use Plug.Router
   use Plug.ErrorHandler
@@ -25,67 +23,10 @@ defmodule ElixirMs.EntryPoint.Rest.ElixirMsController do
     |> build_response(conn)
   end
 
-  get "/api/case-one" do
-    latency = conn.query_params["latency"] || 0
-
-    case CasesUseCase.case_one(latency) do
-      {:ok, response} -> response |> build_response(conn)
-      {:error, error} ->
-        Logger.error("Error case one #{inspect(error)}")
-        build_response(%{status: 500, body: "Error"}, conn)
-    end
-  end
-
-  get "/api/case-two" do
-    latency = conn.query_params["latency"] || 0
-
-    case CasesUseCase.case_two(latency) do
-      {:ok, response} -> response |> build_response(conn)
-      {:error, error} ->
-        Logger.error("Error case two #{inspect(error)}")
-        build_response(%{status: 500, body: "Error"}, conn)
-    end
-  end
-
-  get "/api/case-three" do
-    CasesUseCase.case_three()
-    |> build_response(conn)
-  end
-
-  get "/api/find-by-id" do
-    GetAccountUseCase.find_by_id(4000)
-    |> build_response(conn)
-  end
-
-  get "/api/find-one" do
-    GetAccountUseCase.find_one()
-    |> build_response(conn)
-  end
-
-  get "/api/find-multiple-one" do
-    GetAccountUseCase.find_multiple_one()
-    |> build_response(conn)
-  end
-
-  get "/api/find-test" do
-    GetAccountUseCase.find_test()
-    |> build_response(conn)
-  end
-
-  get "/api/find-multiple-test" do
-    GetAccountUseCase.find_multiple_test()
-    |> build_response(conn)
-  end
-
-  get "/api/findall" do
-    GetAccountUseCase.find_all()
-    |> build_response(conn)
-  end
-
   get "/api/get-hello" do
     latency = conn.query_params["latency"] || 0
 
-    case GetHelloUseCase.handle(latency) do
+    case GetHelloUseCase.hello(latency) do
       {:ok, response} -> response |> build_response(conn)
       {:error, error} ->
         Logger.error("Error get hello #{inspect(error)}")
@@ -93,8 +34,10 @@ defmodule ElixirMs.EntryPoint.Rest.ElixirMsController do
     end
   end
 
-  get "/api/get-multiple-hello" do
-    case GetHelloUseCase.handle_multiple() do
+  get "/api/get-hello-pool" do
+    latency = conn.query_params["latency"] || 0
+
+    case GetHelloUseCase.hello_connection_pool(latency) do
       {:ok, response} -> response |> build_response(conn)
       {:error, error} ->
         Logger.error("Error get hello #{inspect(error)}")
@@ -102,9 +45,9 @@ defmodule ElixirMs.EntryPoint.Rest.ElixirMsController do
     end
   end
 
-  get "/api/primes" do
-    GetPrimesUseCase.get_primes_list(1000)
-    |> build_response(conn)
+  get "/api/db" do
+    DBUseCase.query()
+      |> build_response(conn)
   end
 
   match _ do

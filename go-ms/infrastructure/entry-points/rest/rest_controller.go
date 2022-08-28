@@ -24,7 +24,7 @@ func Start(hello *usecase.HelloUseCase, dbUseCase *usecase.DBUseCase) {
 	router.GET("/api/get-hello-pool", func(c *gin.Context) {
 		latency := c.DefaultQuery("latency", "0")
 
-		if body, err := hello.Hello(latency); err != nil {
+		if body, err := hello.HelloConnectionPool(latency); err != nil {
 			c.String(http.StatusInternalServerError, err.Error())
 		} else {
 			c.String(http.StatusOK, body)
