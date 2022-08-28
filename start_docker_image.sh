@@ -1,7 +1,7 @@
 #!/bin/bash
 project=$1
 docker stop "$(docker ps -q)"
-cd backend-benchmark/$project
+cd testh/$project
 docker build -t "$project" .
 docker rm -f "$project"
 
