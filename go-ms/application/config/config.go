@@ -28,6 +28,10 @@ func InitDB() *gorm.DB {
 }
 
 func GetHttpClient() *http.Client {
+	return &http.Client{}
+}
+
+func GetHttpClientPool() *http.Client {
 	t := http.DefaultTransport.(*http.Transport).Clone()
 	t.MaxIdleConns = 500
 	t.MaxConnsPerHost = 500

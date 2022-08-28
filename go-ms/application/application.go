@@ -10,14 +10,14 @@ import (
 
 func Start() {
 	db := config.InitDB()
-	httpClient := config.GetHttpClient()
+	httpPoolClient := config.GetHttpClientPool()
+	httpClient := config.GetHttpClientPool()
 
 	accountRepository := repository.AccountDataRepository{DB: db}
-	helloRepository := httpclient.HelloHttpRepository{Client: httpClient, Url: config.GetUrlService()}
+	helloRepository := httpclient.HelloHttpRepository{Client: httpClient, PoolClient: httpPoolClient, Url: config.GetUrlService()}
 
-	cases := usecase.CasesUseCase{AccountRepository: &accountRepository, HelloRepository: &helloRepository}
+	dbUseCase := usecase.DBUseCase{AccountRepository: &accountRepository}
 	hello := usecase.HelloUseCase{HelloRepository: &helloRepository}
-	primes := usecase.GetPrimesUseCase{}
 
-	rest.Start(&hello, &cases, &primes)
+	rest.Start(&hello, &dbUseCase)
 }
