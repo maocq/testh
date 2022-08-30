@@ -33,9 +33,9 @@ func GetHttpClient() *http.Client {
 
 func GetHttpClientPool() *http.Client {
 	t := http.DefaultTransport.(*http.Transport).Clone()
-	t.MaxIdleConns = 200
-	t.MaxConnsPerHost = 200
-	t.MaxIdleConnsPerHost = 200
+	t.MaxIdleConns = 500
+	t.MaxConnsPerHost = 500
+	t.MaxIdleConnsPerHost = 500
 
 	return &http.Client{
 		Transport: t,
