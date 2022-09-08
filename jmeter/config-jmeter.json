@@ -1,6 +1,6 @@
 {
     "duration_seconds" : 300,
-    "ramp_up_period_seconds": 10,
+    "ramp_up_period_seconds": 0,
     "latency": 50,
     "hello_number_users": 0,
     "get_hello_number_users": 1500,
