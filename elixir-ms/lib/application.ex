@@ -45,11 +45,13 @@ defmodule ElixirMs.Application do
       {ConfigHolder, AppConfig.load_config()}
     ]
 
-  def application_children(_other_env),
-    do: [
+  def application_children(_other_env) do
+    size = Application.fetch_env!(:elixir_ms, :http_pool_size)
+    [
       {ConfigHolder, AppConfig.load_config()},
       {SecretManagerAdapter, []},
       {ElixirMs.Repo, []},
-      {Finch, name: HttpFinch, pools: %{:default => [size: Application.fetch_env!(:elixir_ms, :http_pool_size)]}}
+      {Finch, name: HttpFinch, pools: %{:default => [size: String.to_integer(size)]}}
     ]
+  end
 end
