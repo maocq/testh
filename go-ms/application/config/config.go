@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -32,10 +33,13 @@ func GetHttpClient() *http.Client {
 }
 
 func GetHttpClientPool() *http.Client {
+	poolSize := GetEnvOrDefault("HTTP_POOL_SIZE", "100")
+	size, _ := strconv.Atoi(poolSize)
+
 	t := http.DefaultTransport.(*http.Transport).Clone()
-	t.MaxIdleConns = 1000
-	t.MaxConnsPerHost = 1000
-	t.MaxIdleConnsPerHost = 1000
+	t.MaxIdleConns = size
+	t.MaxConnsPerHost = size
+	t.MaxIdleConnsPerHost = size
 
 	return &http.Client{
 		Transport: t,
