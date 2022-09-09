@@ -39,7 +39,7 @@ func GetHttpClientPool() *http.Client {
 
 	t := http.DefaultTransport.(*http.Transport).Clone()
 	t.MaxIdleConns = 0
-	t.MaxConnsPerHost = 0
+	t.MaxConnsPerHost = size //0
 	t.MaxIdleConnsPerHost = size
 	t.IdleConnTimeout = 90 * time.Second
 
