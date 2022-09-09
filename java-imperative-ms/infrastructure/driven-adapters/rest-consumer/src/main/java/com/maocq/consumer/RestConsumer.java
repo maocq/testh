@@ -42,7 +42,9 @@ public class RestConsumer implements HelloRepository {
                 .build();
 
         try {
-            return clientPool.newCall(request).execute().body().string();
+            var response = clientPool.newCall(request).execute();
+            System.out.println("protocol: " + response.protocol());
+            return response.body().string();
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
