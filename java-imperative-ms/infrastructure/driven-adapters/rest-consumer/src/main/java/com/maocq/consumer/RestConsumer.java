@@ -41,6 +41,7 @@ public class RestConsumer implements HelloRepository {
                 .get()
                 .build();
 
+        System.out.println(clientPool.connectionPool().connectionCount());
         try {
             return clientPool.newCall(request).execute().body().string();
         } catch (Exception e) {
