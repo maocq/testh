@@ -21,6 +21,11 @@ public class RestConsumerConfig {
 
     @Bean(name = "pool")
     public OkHttpClient getHttpClientPool() {
+        System.out.println("-----------");
+        System.out.println("-----------");
+        System.out.println(poolSize);
+        System.out.println("-----------");
+        System.out.println("-----------");
         return new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(poolSize,5L, TimeUnit.MINUTES))
                 .build();
