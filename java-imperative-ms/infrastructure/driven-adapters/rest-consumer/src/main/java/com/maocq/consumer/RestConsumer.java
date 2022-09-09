@@ -28,6 +28,7 @@ public class RestConsumer implements HelloRepository {
             .get()
             .build();
 
+        System.out.println("Client: " + client.connectionPool().connectionCount());
         try {
             return client.newCall(request).execute().body().string();
         } catch (Exception e) {
@@ -41,7 +42,7 @@ public class RestConsumer implements HelloRepository {
                 .get()
                 .build();
 
-        System.out.println(clientPool.connectionPool().connectionCount());
+        System.out.println("ClientPool: " + clientPool.connectionPool().connectionCount());
         try {
             return clientPool.newCall(request).execute().body().string();
         } catch (Exception e) {
