@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -37,9 +38,10 @@ func GetHttpClientPool() *http.Client {
 	size, _ := strconv.Atoi(poolSize)
 
 	t := http.DefaultTransport.(*http.Transport).Clone()
-	t.MaxIdleConns = size
-	t.MaxConnsPerHost = size
+	t.MaxIdleConns = 0
+	t.MaxConnsPerHost = 0
 	t.MaxIdleConnsPerHost = size
+	t.IdleConnTimeout = 90 * time.Second
 
 	return &http.Client{
 		Transport: t,
