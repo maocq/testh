@@ -10,6 +10,9 @@ import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.resources.ConnectionProvider;
+
+import java.time.Duration;
 
 import static io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -22,7 +25,10 @@ public class RestConsumerConfig {
     @Value("${adapter.restconsumer.timeout}")
     private int timeout;
 
-    @Bean
+    @Value("${adapter.restconsumer.pool}")
+    private int poolSize;
+
+    @Bean(name = "noPool")
     public WebClient getWebClient() {
         return WebClient.builder()
             .baseUrl(url)
@@ -31,12 +37,39 @@ public class RestConsumerConfig {
             .build();
     }
 
+    @Bean(name = "pool")
+    public WebClient getWebClientConnectionPool() {
+        return WebClient.builder()
+                .baseUrl(url)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .clientConnector(getClientHttpConnectorConnectionPool())
+                .build();
+    }
+
     private ClientHttpConnector getClientHttpConnector() {
         /*
         IF YO REQUIRE APPEND SSL CERTIFICATE SELF SIGNED
         SslContext sslContext = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE)
                 .build();*/
         return new ReactorClientHttpConnector(HttpClient.create()
+                //.secure(sslContextSpec -> sslContextSpec.sslContext(sslContext))
+                .compress(true)
+                .keepAlive(true)
+                .option(CONNECT_TIMEOUT_MILLIS, timeout)
+                .doOnConnected(connection -> {
+                    connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
+                }));
+    }
+
+    private ClientHttpConnector getClientHttpConnectorConnectionPool() {
+        ConnectionProvider provider =
+                ConnectionProvider.builder("custom")
+                        .maxConnections(poolSize)
+                        .maxIdleTime(Duration.ofSeconds(90))
+                        .build();
+
+        return new ReactorClientHttpConnector(HttpClient.create(provider)
                 //.secure(sslContextSpec -> sslContextSpec.sslContext(sslContext))
                 .compress(true)
                 .keepAlive(true)
