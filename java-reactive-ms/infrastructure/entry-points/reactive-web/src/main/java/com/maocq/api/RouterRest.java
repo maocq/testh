@@ -16,7 +16,7 @@ public RouterFunction<ServerResponse> routerFunction(Handler handler) {
 
     return route(GET("/api/hello"), handler::listenHello)
       .andRoute(GET("/api/get-hello"), handler::listenGETHello)
-      .andRoute(GET("/api/get-hello-pool"), handler::listenGETHello)
+      .andRoute(GET("/api/get-hello-pool"), handler::listenGETHelloConnectionPool)
       .andRoute(GET("/api/db"), handler::listenDB);
     }
 }
