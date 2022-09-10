@@ -64,11 +64,13 @@ public class RestConsumerConfig {
 
     private ClientHttpConnector getClientHttpConnectorConnectionPool() {
         ConnectionProvider provider =
+                ConnectionProvider.create("custom", poolSize);
+        /*
                 ConnectionProvider.builder("custom")
                         .maxConnections(poolSize)
                         .maxIdleTime(Duration.ofSeconds(90))
                         .build();
-
+         */
         return new ReactorClientHttpConnector(HttpClient.create(provider)
                 //.secure(sslContextSpec -> sslContextSpec.sslContext(sslContext))
                 .compress(true)
