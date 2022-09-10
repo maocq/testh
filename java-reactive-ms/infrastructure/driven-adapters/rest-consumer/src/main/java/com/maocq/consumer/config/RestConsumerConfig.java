@@ -51,6 +51,9 @@ public class RestConsumerConfig {
         IF YO REQUIRE APPEND SSL CERTIFICATE SELF SIGNED
         SslContext sslContext = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE)
                 .build();*/
+
+        return new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection()));
+        /*
         return new ReactorClientHttpConnector(HttpClient.create()
                 //.secure(sslContextSpec -> sslContextSpec.sslContext(sslContext))
                 .compress(true)
@@ -60,6 +63,7 @@ public class RestConsumerConfig {
                     connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
                     connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
                 }));
+         */
     }
 
     private ClientHttpConnector getClientHttpConnectorConnectionPool() {
