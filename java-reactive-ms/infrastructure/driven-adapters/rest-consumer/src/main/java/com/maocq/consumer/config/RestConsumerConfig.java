@@ -66,7 +66,7 @@ public class RestConsumerConfig {
         ConnectionProvider provider =
                 ConnectionProvider.builder("custom")
                         .maxConnections(poolSize)
-                        .pendingAcquireMaxCount(poolSize)
+                        .pendingAcquireMaxCount(-1)
                         .build();
 
         return new ReactorClientHttpConnector(HttpClient.create(provider)
