@@ -12,8 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
 
-import java.time.Duration;
-
 import static io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -51,8 +49,6 @@ public class RestConsumerConfig {
         IF YO REQUIRE APPEND SSL CERTIFICATE SELF SIGNED
         SslContext sslContext = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE)
                 .build();*/
-
-        return new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection()));
         /*
         return new ReactorClientHttpConnector(HttpClient.create()
                 //.secure(sslContextSpec -> sslContextSpec.sslContext(sslContext))
@@ -64,6 +60,8 @@ public class RestConsumerConfig {
                     connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
                 }));
          */
+
+        return new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection()));
     }
 
     private ClientHttpConnector getClientHttpConnectorConnectionPool() {
