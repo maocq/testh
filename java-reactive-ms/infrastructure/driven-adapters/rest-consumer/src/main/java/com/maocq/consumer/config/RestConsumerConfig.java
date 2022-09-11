@@ -61,7 +61,13 @@ public class RestConsumerConfig {
                 }));
          */
 
-        return new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection()));
+        return new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection())
+                .compress(true)
+                .option(CONNECT_TIMEOUT_MILLIS, timeout)
+                .doOnConnected(connection -> {
+                    connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
+                }));
     }
 
     private ClientHttpConnector getClientHttpConnectorConnectionPool() {
