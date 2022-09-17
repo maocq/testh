@@ -49,7 +49,7 @@ func GetHttpClientPool() *http.Client {
 }
 
 func GetUrlService() string {
-	return "https://node.cmcloudlab551.info"
+	return "http://node.cmcloudlab551.info"
 	//return fmt.Sprintf("http://%s:8080", GetEnvOrDefault("EXTERNAL_SERVICE_IP", "node-latency"))
 }
 
