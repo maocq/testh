@@ -6,5 +6,5 @@
     "instance_type": "c5.large",
     "security_group": "sg-0ac695d03feaf6204",
     "image_id": "ami-052efd3df9dad4825",
-    "http_pool_size": 2000
+    "http_pool_size": 500
 }

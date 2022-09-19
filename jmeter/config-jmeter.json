@@ -1,11 +1,11 @@
 {
-    "duration_seconds" : 300,
+    "duration_seconds" : 100,
     "ramp_up_period_seconds": 0,
-    "latency": 500,
+    "latency": 10,
     "hello_number_users": 0,
-    "get_http_number_users": 3000,
+    "get_http_number_users": 0,
     "get_https_number_users": 0,
     "get_pool_http1_number_users": 0,
-    "get_pool_http2_number_users": 0,
+    "get_pool_http2_number_users": 3000,
     "query_number_users": 0
 }
