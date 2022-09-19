@@ -245,22 +245,22 @@
           </elementProp>
           <elementProp name="GET_HTTP_NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">GET_HTTP_NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">_GET_HTTP_NUM_USERS_</stringProp>
+            <stringProp name="Argument.value">_GET_HTTP_NUMBER_USERS_</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="GET_HTTPS_NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">GET_HTTPS_NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">_GET_HTTPS_NUM_USERS_</stringProp>
+            <stringProp name="Argument.value">_GET_HTTPS_NUMBER_USERS_</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="GET_POOL_HTTP1_NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">GET_POOL_HTTP1_NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">_GET_POOL_HTTP1_NUM_USERS_</stringProp>
+            <stringProp name="Argument.value">_GET_POOL_HTTP1_NUMBER_USERS_</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="GET_POOL_HTTP2_NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">GET_POOL_HTTP2_NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">_GET_POOL_HTTP2_NUM_USERS_</stringProp>
+            <stringProp name="Argument.value">_GET_POOL_HTTP2_NUMBER_USERS_</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="QUERY_NUMBER_USERS" elementType="Argument">
