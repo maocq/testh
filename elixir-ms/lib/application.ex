@@ -52,7 +52,7 @@ defmodule ElixirMs.Application do
       {SecretManagerAdapter, []},
       {ElixirMs.Repo, []},
       #{Finch, name: HttpFinch, pools: %{:default => [size: String.to_integer(size)]}}
-      {Finch, name: HttpFinch, pools: %{:default => [protocol: :http2, size: 2, count: 1000]}}
+      {Finch, name: HttpFinch, pools: %{:default => [protocol: :http2, size: 50]}}
     ]
   end
 end
