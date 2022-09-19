@@ -31,7 +31,7 @@ func Start(hello *usecase.HelloUseCase, dbUseCase *usecase.DBUseCase) {
 		}
 	})
 
-	router.GET("/api/pool-http2", func(c *gin.Context) {
+	router.GET("/api/pool-http1", func(c *gin.Context) {
 		latency := c.DefaultQuery("latency", "0")
 
 		if body, err := hello.HelloConnectionPoolHttp1(latency); err != nil {
@@ -41,7 +41,7 @@ func Start(hello *usecase.HelloUseCase, dbUseCase *usecase.DBUseCase) {
 		}
 	})
 
-	router.GET("/api/pool-http1", func(c *gin.Context) {
+	router.GET("/api/pool-http2", func(c *gin.Context) {
 		latency := c.DefaultQuery("latency", "0")
 
 		if body, err := hello.HelloConnectionPoolHttp2(latency); err != nil {
