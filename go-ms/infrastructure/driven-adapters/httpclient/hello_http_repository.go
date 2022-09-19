@@ -38,6 +38,9 @@ func (h *HelloHttpRepository) HelloConnectionPoolHttp2(latency string) (string, 
 }
 
 func request(latency string, url string, client *http.Client) (string, error) {
+
+	fmt.Println(url)
+
 	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return "", err
@@ -47,6 +50,8 @@ func request(latency string, url string, client *http.Client) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	fmt.Println(response.Proto)
 
 	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
