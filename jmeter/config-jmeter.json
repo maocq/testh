@@ -4,8 +4,8 @@
     "latency": 10,
     "hello_number_users": 0,
     "get_http_number_users": 0,
-    "get_https_number_users": 0,
+    "get_https_number_users": 3000,
     "get_pool_http1_number_users": 0,
-    "get_pool_http2_number_users": 3000,
+    "get_pool_http2_number_users": 0,
     "query_number_users": 0
 }
