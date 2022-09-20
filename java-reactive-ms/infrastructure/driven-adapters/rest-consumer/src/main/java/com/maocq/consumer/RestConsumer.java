@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.HttpProtocol;
+import reactor.netty.http.client.HttpClient;
 
 @Service
 public class RestConsumer implements HelloRepository {
@@ -53,10 +55,21 @@ public class RestConsumer implements HelloRepository {
 
     @Override
     public Mono<String> helloConnectionPoolHttp2(int latency) {
+        // Aqui....
+        HttpClient client =
+                HttpClient.create()
+                        .protocol(HttpProtocol.H2)
+                        .secure();
+
+        return client.get()
+                        .uri("https://n1.apidevopsteam.xyz/" + latency)
+                        .responseSingle((res, bytes) -> bytes.asString());
+        /*
         return clientHttp2
                 .get()
                 .uri("/{latency}", latency)
                 .retrieve()
                 .bodyToMono(String.class);
+         */
     }
 }
