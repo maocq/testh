@@ -20,6 +20,6 @@ database:
   port: 5432
 adapter:
   restconsumer:
-    timeout: 5000
+    timeout: 10000
     url: "n1.apidevopsteam.xyz"
     pool: "${HTTP_POOL_SIZE:100}"
