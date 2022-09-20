@@ -104,7 +104,7 @@ public class RestConsumerConfig {
                         .build();
 
         return new ReactorClientHttpConnector(HttpClient.create(provider)
-                //.protocol(HttpProtocol.H2)
+                .protocol(HttpProtocol.H2)
                 //.secure()
                 );
                 /*
