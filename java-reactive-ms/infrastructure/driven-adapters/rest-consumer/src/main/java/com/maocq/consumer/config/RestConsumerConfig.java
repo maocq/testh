@@ -57,7 +57,7 @@ public class RestConsumerConfig {
     @Bean(name = "http2")
     public WebClient getWebClientConnectionHttp2() {
         return WebClient.builder()
-                .baseUrl("http://" + url)
+                .baseUrl("https://" + url)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .clientConnector(getClientHttp2ConnectorConnectionPool())
                 .build();
