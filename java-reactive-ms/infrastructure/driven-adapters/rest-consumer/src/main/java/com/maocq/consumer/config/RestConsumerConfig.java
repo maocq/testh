@@ -105,7 +105,7 @@ public class RestConsumerConfig {
 
         return new ReactorClientHttpConnector(HttpClient.create(provider)
                 .protocol(HttpProtocol.H2)
-                //.secure()
+                .secure()
                 );
                 /*
                 .option(CONNECT_TIMEOUT_MILLIS, timeout)
