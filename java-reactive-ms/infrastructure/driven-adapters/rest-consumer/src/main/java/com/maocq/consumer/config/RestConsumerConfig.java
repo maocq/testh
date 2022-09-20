@@ -97,7 +97,13 @@ public class RestConsumerConfig {
     }
 
     private ClientHttpConnector getClientHttp2ConnectorConnectionPool() {
-        return new ReactorClientHttpConnector(HttpClient.create()
+        ConnectionProvider provider =
+                ConnectionProvider.builder("custom")
+                        .maxConnections(poolSize)
+                        .pendingAcquireMaxCount(-1)
+                        .build();
+
+        return new ReactorClientHttpConnector(HttpClient.create(provider)
                 .protocol(HttpProtocol.H2)
                 .secure());
                 /*
