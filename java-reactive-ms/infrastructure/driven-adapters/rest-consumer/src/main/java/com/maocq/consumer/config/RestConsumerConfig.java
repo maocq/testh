@@ -107,7 +107,7 @@ public class RestConsumerConfig {
                 .compress(true)
                 .keepAlive(true)                
                 .protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
-                .secure()
+                //.secure()
                 );
                 /*
                 .option(CONNECT_TIMEOUT_MILLIS, timeout)
