@@ -99,13 +99,13 @@ public class RestConsumerConfig {
     private ClientHttpConnector getClientHttp2ConnectorConnectionPool() {
         return new ReactorClientHttpConnector(HttpClient.create()
                 .protocol(HttpProtocol.H2C)
-                .secure()
+                .secure());
                 /*
                 .option(CONNECT_TIMEOUT_MILLIS, timeout)
                 .doOnConnected(connection -> {
                     connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
                     connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
-                }))
-                );
+                }));
+                 */
     }
 }
