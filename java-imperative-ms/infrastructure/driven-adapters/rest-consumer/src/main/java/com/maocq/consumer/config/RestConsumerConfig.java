@@ -14,15 +14,26 @@ public class RestConsumerConfig {
     @Value("${adapter.restconsumer.pool}")
     private int poolSize;
 
-    @Bean(name = "noPool")
+    @Bean(name = "noPoolHttp")
     public OkHttpClient getHttpClient() {
         return new OkHttpClient();
     }
 
+
+    @Bean(name = "noPoolHttps")
+    public OkHttpClient getHttpsClient() {
+        return new OkHttpClient();
+    }
+
     @Bean(name = "pool")
-    public OkHttpClient getHttpClientPool() {
+    public OkHttpClient getHttp1ClientPool() {
         return new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(poolSize,5L, TimeUnit.MINUTES))
                 .build();
+    }
+
+    @Bean(name = "http2")
+    public OkHttpClient getHttp2ClientPool() {
+        return new OkHttpClient();
     }
 }

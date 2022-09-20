@@ -107,11 +107,6 @@ public class RestConsumerConfig {
                 .compress(true)
                 .keepAlive(true)                
                 .protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
-                .secure()
-                .option(CONNECT_TIMEOUT_MILLIS, timeout)
-                .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
-                }));                 
+                .secure());
     }
 }
