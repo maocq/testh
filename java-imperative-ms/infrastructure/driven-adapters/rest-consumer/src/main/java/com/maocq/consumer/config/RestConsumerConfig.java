@@ -37,7 +37,7 @@ public class RestConsumerConfig {
     @Bean(name = "http2")
     public OkHttpClient getHttp2ClientPool() {
         return new OkHttpClient.Builder()
-                .protocols(Arrays.asList(Protocol.H2_PRIOR_KNOWLEDGE))
+                .protocols(Arrays.asList(Protocol.HTTP_2, Protocol.HTTP_1_1))
                 .build();
     }
 }
