@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.HttpProtocol;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
 
@@ -53,6 +54,15 @@ public class RestConsumerConfig {
                 .build();
     }
 
+    @Bean(name = "http2")
+    public WebClient getWebClientConnectionHttp2() {
+        return WebClient.builder()
+                .baseUrl("https://" + url)
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                .clientConnector(getClientHttp2ConnectorConnectionPool())
+                .build();
+    }
+
     private ClientHttpConnector getClientHttpConnector() {
         /* IF YO REQUIRE APPEND SSL CERTIFICATE SELF SIGNED
         SslContext sslContext = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE)
@@ -86,4 +96,14 @@ public class RestConsumerConfig {
                 }));
     }
 
+    private ClientHttpConnector getClientHttp2ConnectorConnectionPool() {
+        return new ReactorClientHttpConnector(HttpClient.create()
+                .protocol(HttpProtocol.H2)
+                .secure()
+                .option(CONNECT_TIMEOUT_MILLIS, timeout)
+                .doOnConnected(connection -> {
+                    connection.addHandlerLast(new ReadTimeoutHandler(timeout, MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(timeout, MILLISECONDS));
+                }));
+    }
 }
