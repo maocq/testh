@@ -2,10 +2,12 @@ package com.maocq.consumer.config;
 
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -34,6 +36,8 @@ public class RestConsumerConfig {
 
     @Bean(name = "http2")
     public OkHttpClient getHttp2ClientPool() {
-        return new OkHttpClient();
+        return new OkHttpClient.Builder()
+                .protocols(Arrays.asList(Protocol.H2_PRIOR_KNOWLEDGE))
+                .build();
     }
 }
