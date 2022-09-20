@@ -52,8 +52,8 @@ public class RestConsumer implements HelloRepository {
 
     @Override
     public String helloConnectionPoolHttp1(int latency) {
-        Request request = new Request.Builder().url("https://" + url + "/" + latency).get().build();
-        try {
+        Request request = new Request.Builder().url("http://" + url + "/" + latency).get().build();
+        try {        
             return clientPool.newCall(request).execute().body().string();
         } catch (Exception e) {
             throw new IllegalStateException(e);
