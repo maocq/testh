@@ -57,7 +57,7 @@ public class RestConsumerConfig {
     @Bean(name = "http2")
     public WebClient getWebClientConnectionHttp2() {
         return WebClient.builder()
-                .baseUrl("https://" + url)
+                .baseUrl("http://" + url)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .clientConnector(getClientHttp2ConnectorConnectionPool())
                 .build();
@@ -106,8 +106,7 @@ public class RestConsumerConfig {
         return new ReactorClientHttpConnector(HttpClient.create()
                 .compress(true)
                 .keepAlive(true)                
-                .protocol(HttpProtocol.H2)
-                .wiretap(true)
+                .protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
                 .secure()
                 );
                 /*
