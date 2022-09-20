@@ -23,5 +23,5 @@ spring.datasource.hikari.maximum-pool-size: 10
 
 adapter:
   restconsumer:
-    url: "n1.apidevopsteam.xyz"
+    url: "n4.apidevopsteam.xyz"
     pool: "${HTTP_POOL_SIZE:100}"
