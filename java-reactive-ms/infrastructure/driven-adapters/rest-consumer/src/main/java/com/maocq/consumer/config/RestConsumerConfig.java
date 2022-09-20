@@ -98,7 +98,7 @@ public class RestConsumerConfig {
 
     private ClientHttpConnector getClientHttp2ConnectorConnectionPool() {
         return new ReactorClientHttpConnector(HttpClient.create()
-                .protocol(HttpProtocol.H2C)
+                .protocol(HttpProtocol.H2)
                 .secure());
                 /*
                 .option(CONNECT_TIMEOUT_MILLIS, timeout)
