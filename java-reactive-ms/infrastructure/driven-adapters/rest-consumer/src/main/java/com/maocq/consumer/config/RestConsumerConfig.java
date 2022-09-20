@@ -103,8 +103,11 @@ public class RestConsumerConfig {
                         .pendingAcquireMaxCount(-1)
                         .build();
 
-        return new ReactorClientHttpConnector(HttpClient.create(provider)
+        return new ReactorClientHttpConnector(HttpClient.create()
+                .compress(true)
+                .keepAlive(true)                
                 .protocol(HttpProtocol.H2)
+                .wiretap(true)
                 .secure()
                 );
                 /*
