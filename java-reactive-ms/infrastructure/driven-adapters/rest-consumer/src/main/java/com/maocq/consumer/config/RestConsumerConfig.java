@@ -106,7 +106,8 @@ public class RestConsumerConfig {
         return new ReactorClientHttpConnector(HttpClient.create(provider)
                 .compress(true)
                 .keepAlive(true)                
-                .protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
+                .protocol(HttpProtocol.H2)
+                //.protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
                 //.wiretap(true)
                 .secure());
     }
