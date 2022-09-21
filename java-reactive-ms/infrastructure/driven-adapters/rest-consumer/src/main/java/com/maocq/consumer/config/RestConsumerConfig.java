@@ -107,6 +107,7 @@ public class RestConsumerConfig {
                 .compress(true)
                 .keepAlive(true)                
                 .protocol(HttpProtocol.H2, HttpProtocol.HTTP11)
+                //.wiretap(true)
                 .secure());
     }
 }
