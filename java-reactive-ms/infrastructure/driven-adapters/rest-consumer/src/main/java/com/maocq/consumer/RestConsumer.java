@@ -15,6 +15,7 @@ public class RestConsumer implements HelloRepository {
     private final WebClient clientNPHttps;
     private final WebClient clientPool;
     private final WebClient clientHttp2;
+    private final HttpClient clientHttp2Ok = HttpClient.create().protocol(HttpProtocol.H2).secure();
 
     public RestConsumer(
             @Qualifier("noPoolHttp") WebClient clientNPHttp,
@@ -55,12 +56,7 @@ public class RestConsumer implements HelloRepository {
 
     @Override
     public Mono<String> helloConnectionPoolHttp2(int latency) {
-        HttpClient client =
-                HttpClient.create()
-                        .protocol(HttpProtocol.H2)
-                        .secure();
-
-        return client.get()
+        return clientHttp2Ok.get()
                         .uri("https://n4.apidevopsteam.xyz/" + latency)
                         .responseSingle((res, bytes) -> bytes.asString());                       
 
