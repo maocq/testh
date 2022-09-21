@@ -24,7 +24,7 @@ defmodule ElixirMs.Adapters.HelloHttp do
 
   def hello_connection_pool_http1(latency) do
     %{ external_service_ip: external_service_ip } = SecretManagerAdapter.get_secret()
-    url = "http://#{external_service_ip}/#{latency}"
+    url = "https://#{external_service_ip}/#{latency}"
 
     case Finch.build(:get, url) |> Finch.request(HttpFinch, [pool_timeout: 30_000]) do
     #case Finch.build(:get, url) |> Finch.request(HttpFinch) do
