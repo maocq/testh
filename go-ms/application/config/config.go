@@ -49,7 +49,7 @@ func GetHttpClientPool() *http.Client {
 }
 
 func GetUrlService() string {
-	return "n2.apidevopsteam.xyz"
+	return "n4.apidevopsteam.xyz"
 }
 
 func GetEnvOrDefault(key string, defaultV string) string {
