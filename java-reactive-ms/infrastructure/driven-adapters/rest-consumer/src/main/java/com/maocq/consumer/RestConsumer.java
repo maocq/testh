@@ -57,7 +57,7 @@ public class RestConsumer implements HelloRepository {
     public Mono<String> helloConnectionPoolHttp2(int latency) {
         HttpClient client =
                 HttpClient.create()
-                        .protocol(HttpProtocol.HTTP11)
+                        .protocol(HttpProtocol.H2)
                         .secure();
 
         return client.get()
