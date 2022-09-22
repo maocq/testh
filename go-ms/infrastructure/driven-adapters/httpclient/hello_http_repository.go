@@ -19,7 +19,6 @@ func (h *HelloHttpRepository) HelloHttp(latency string) (string, error) {
 }
 
 func (h *HelloHttpRepository) HelloHttps(latency string) (string, error) {
-	//Crear nuevo cliente
 	urlComplete := fmt.Sprintf("%s://%s/%s", "https", h.Url, latency)
 
 	return request(latency, urlComplete, &http.Client{})
